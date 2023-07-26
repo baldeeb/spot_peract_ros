@@ -1,0 +1,6 @@
+[submodule "spot_ros"]
+	path = spot_ros
+	url = git@github.com:RPM-lab-UMN/spot_ros.git
+[submodule "peract_ros_wrapper/src/spot_peract"]
+	path = peract_ros_wrapper/src/spot_peract
+	url = git@github.com:baldeeb/spot_peract.git
