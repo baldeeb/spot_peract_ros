@@ -1,0 +1,7 @@
+packaging 
+pyyaml
+omegaconf==2.1.1
+numpy-quaternion
+empy
+catkin_pkg
+rospkg

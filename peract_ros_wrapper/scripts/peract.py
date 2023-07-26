@@ -1,30 +1,22 @@
 #!/usr/bin/env python
 
+import os
 import yaml
 import numpy as np
 from enum import Enum
 from copy import deepcopy
 from scipy.spatial.transform import Rotation as R
 from quaternion import quaternion, as_rotation_matrix
-
 import rospy
 import actionlib
 from cv_bridge import CvBridge
-
 from tf2_ros import Buffer, TransformListener
-import tf2_py as tf2
-
 from message_filters import Subscriber as MFSubscriber
 from message_filters import ApproximateTimeSynchronizer
-
-from std_msgs.msg import String, Duration, Bool, Empty
+from std_msgs.msg import Duration, Empty
 from sensor_msgs.msg import Image, CameraInfo
-from tf2_msgs.msg import TFMessage
-from nav_msgs.msg import Odometry
 from geometry_msgs.msg import PoseWithCovarianceStamped, TransformStamped, PoseStamped
-
-from spot_ros.spot_msgs.msg import TaskState, TrajectoryAction, TrajectoryGoal
-
+from spot_msgs.msg import TaskState, TrajectoryAction, TrajectoryGoal
 from spot_peract.agents.peract_spot_bc.inference_agent import PeractAgentInterface
 from pprint import pprint as pp
 
@@ -129,12 +121,12 @@ class TopicData:
         # Agent 
         cfg = {
             # Specify path to trained weights
-            'seed_path': '/home/baldeeb/Code/spot_peract/logs/multi/PERACT_SPOT_BC/seed0',
+            'seed_path': '/home/baldeeb/Code/spot_peract/logs/multi/PERACT_SPOT_BC/seed2/',
             'weight': 39900,
 
             # Specify camera and voxel settings
             'camera_resolution': [640, 480],
-            'scene_bounds': [-3.0, -3.0, -3.0, 3.0, 3.0, 3.0],
+            'scene_bounds': [-3.0, -3.0, -1.0, 3.0, 3.0, 1.0],
             'device': 'cuda:1'
 	    }
         self.agent = PeractAgentInterface(cfg)
@@ -257,7 +249,7 @@ class TopicData:
             action, render = self.agent.step(self._peract_data)
             self._visualize_rendered_voxel(render)
             self._proposed_skill, self._proposed_pose = self._decipher_action(action)
-            self._publish_pred_action(self._proposed_pose)
+            self._publish_pred_action(self._proposed_skill, self._proposed_pose)
             self._await_confirmation()
         elif self._state == self.STATE.REQUEST_ACTION:
             self.request_action('goto', self._proposed_pose)
@@ -329,9 +321,9 @@ class ActionClient:
 if __name__ == '__main__':
 
     rospy.init_node('peract_wrapper', anonymous=True)
-
-    config = open("/home/baldeeb/Code/robot_action_ws/src/peract_ros_wrapper/config/topic_info.yaml", "r")
-    # config = open("/home/rpm/revo/robot_action_ws/src/peract_ros_wrapper/config/topic_info.yaml", "r")
+    # Get directory of the current file 
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    config = open(f"{dir_path}/../config/topic_info.yaml", "r")
     cfg = yaml.load(config, Loader=yaml.FullLoader)
     topicData = TopicData(cfg['topics'])
 
