@@ -1,0 +1,27 @@
+topics:
+  - {name: "frontleft_image",        topic: "/spot/camera/frontleft/image",           type: Image}
+  - {name: "frontright_image",       topic: "/spot/camera/frontright/image",          type: Image}
+  - {name: "left_image",             topic: "/spot/camera/left/image",                type: Image}
+  - {name: "right_image",            topic: "/spot/camera/right/image",               type: Image}
+  # - {name: "back_image",             topic: "/spot/camera/back/image",                type: Image}
+  - {name: "frontleft_depth",        topic: "/spot/depth/frontleft/depth_in_visual",  type: Image}
+  - {name: "frontright_depth",       topic: "/spot/depth/frontright/depth_in_visual", type: Image}
+  - {name: "left_depth",             topic: "/spot/depth/left/image",                 type: Image}
+  - {name: "right_depth",            topic: "/spot/depth/right/image",                type: Image}
+  # - {name: "back_depth",             topic: "/spot/depth/back/image",                 type: Image}
+  # - {name: "odometry",               topic: "/spot/odometry",                         type: Odometry}
+  - {name: "frontleft_camera_info",  topic: "/spot/camera/frontleft/camera_info",     type: CameraInfo}
+  - {name: "frontright_camera_info", topic: "/spot/camera/frontright/camera_info",    type: CameraInfo}
+  - {name: "left_camera_info",       topic: "/spot/camera/left/camera_info",          type: CameraInfo}
+  - {name: "right_camera_info",      topic: "/spot/camera/right/camera_info",         type: CameraInfo}
+  # - {name: "back_camera_info",       topic: "/spot/camera/back/camera_info",          type: CameraInfo}
+  
+  # - {name: "frontleft_depth_info",   topic: "/spot/depth/frontleft/camera_info",      type: CameraInfo}
+  # - {name: "frontright_depth_info",  topic: "/spot/depth/frontright/camera_info",     type: CameraInfo}
+  # - {name: "left_depth_info",        topic: "/spot/depth/left/camera_info",           type: CameraInfo}
+  # - {name: "right_depth_info",       topic: "/spot/depth/right/camera_info",          type: CameraInfo}
+  # - {name: "back_depth_info",        topic: "/spot/depth/back/camera_info",           type: CameraInfo}
+
+  # - {name: "tf_static",              topic: "/tf_static",                             type: TFMessage}
+  # - {name: "tf",                     topic: "/tf",                                    type: TFMessage}
+  # - {name: "task_state",             topic: "/spot/task_state",                       type: TaskState}
