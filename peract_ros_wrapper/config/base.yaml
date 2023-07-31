@@ -1,4 +1,20 @@
-topics:
+node_rate: 2
+
+# Specify path to trained weights
+
+# seed_path: '/home/baldeeb/Code/spot_peract/logs/multi/PERACT_SPOT_BC/seed2/'
+# weight: 39900
+
+seed_path: '/home/baldeeb/Code/spot_peract/logs/multi/PERACT_SPOT_BC/seed5/'
+weight: 3500
+
+
+# Specify camera and voxel settings
+camera_resolution: [640, 480]
+scene_bounds:      [-3.0, -3.0, -1.0, 3.0, 3.0, 1.0]
+device: 'cuda:1'
+
+topics_info:
   - {name: "frontleft_image",        topic: "/spot/camera/frontleft/image",           type: Image}
   - {name: "frontright_image",       topic: "/spot/camera/frontright/image",          type: Image}
   - {name: "left_image",             topic: "/spot/camera/left/image",                type: Image}

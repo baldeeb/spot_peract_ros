@@ -113,22 +113,12 @@ class TopicData:
 
     # DATA STORED IN topicData.topic_data as dictionary
 
-    def __init__(self, topics_info):
-        self.topics_info = topics_info
+    def __init__(self, cfg):
+        self.topics_info = cfg['topics_info']
         self._data = {}
         self.cv_bridge = CvBridge()
 
         # Agent 
-        cfg = {
-            # Specify path to trained weights
-            'seed_path': '/home/baldeeb/Code/spot_peract/logs/multi/PERACT_SPOT_BC/seed2/',
-            'weight': 39900,
-
-            # Specify camera and voxel settings
-            'camera_resolution': [640, 480],
-            'scene_bounds': [-3.0, -3.0, -1.0, 3.0, 3.0, 1.0],
-            'device': 'cuda:1'
-	    }
         self.agent = PeractAgentInterface(cfg)
 
         # State Machine
@@ -323,11 +313,10 @@ if __name__ == '__main__':
     rospy.init_node('peract_wrapper', anonymous=True)
     # Get directory of the current file 
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    config = open(f"{dir_path}/../config/topic_info.yaml", "r")
+    config = open(f"{dir_path}/../config/base.yaml", "r")
     cfg = yaml.load(config, Loader=yaml.FullLoader)
-    topicData = TopicData(cfg['topics'])
-
-    rate = rospy.Rate(2)
+    topicData = TopicData(cfg)
+    rate = rospy.Rate(cfg['node_rate'])
     while not rospy.is_shutdown():
         topicData._step()
         rate.sleep()
