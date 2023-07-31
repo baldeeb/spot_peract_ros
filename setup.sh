@@ -13,8 +13,11 @@ else conda create --prefix ${PROJECT_ROOT}/env/${ENV_NAME} python=3.8 -y;
 fi
 eval "$(conda shell.bash hook)"
 conda activate ${PROJECT_ROOT}/env/${ENV_NAME}
+
+pip install psutil
+pip install packaging
+pip install -r requirements.txt -q
 pip install --upgrade pip
-pip install -r requirements.txt
 
 # Setup PerAct
 source ${PROJECT_ROOT}/peract_ros_wrapper/src/spot_peract/setup.sh
